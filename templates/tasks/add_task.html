@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Add Task to "{{ project.project_name }}"</h2>
+
+    <form method="POST" action="{{ url_for('task_routes.add_task', project_id=project.project_id) }}">
+        <div class="mb-3">
+            <label for="task_title" class="form-label">Task Title</label>
+            <input type="text" class="form-control" id="task_title" name="task_title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="task_description" class="form-label">Description</label>
+            <textarea class="form-control" id="task_description" name="task_description" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="assigned_to" class="form-label">Assigned To</label>
+            <select class="form-control" id="assigned_to" name="assigned_to">
+                <option value="">-- Select a User --</option>
+                {% for user in users %}
+                    <option value="{{ user.user_id }}">{{ user.user_firstname }} {{ user.user_lastname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="due_date" class="form-label">Due Date</label>
+            <input type="date" class="form-control" id="due_date" name="due_date">
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-control" id="status" name="status">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Create Task</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Welcome, {{ session['user_name'] }}!</h2>
+    
+    <div class="row mt-4">
+        <!-- Projects Overview -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5>Your Projects</h5>
+                </div>
+                <div class="card-body">
+                    <p>You have <strong>{{ total_projects }}</strong> projects.</p>
+                    <a href="{{ url_for('project_routes.manage_projects') }}" class="btn btn-outline-primary">View Projects</a>
+                    <a href="{{ url_for('project_routes.add_project') }}" class="btn btn-primary">New Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management (Admin only) -->
+        {% if session['role'] == 'Admin' %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5>User Management</h5>
+                </div>
+                <div class="card-body">
+                    <p>Manage system users and permissions.</p>
+                    <a href="{{ url_for('user_routes.manage_users') }}" class="btn btn-outline-success">Manage Users</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5>Settings</h5>
+                </div>
+                <div class="card-body">
+                    <p>Update your profile and account settings.</p>
+                    <a href="#" class="btn btn-outline-info">Go to Settings</a>
+                </div>
+            </div>
+        </div>
+
+       
+        </div>
+    </div>
+</div>
+{% endblock %}

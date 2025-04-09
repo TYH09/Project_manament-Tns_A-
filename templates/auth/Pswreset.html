@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Password Reset Requested</h2>
+    <p>If the email you entered is associated with an account, you will receive a password reset link shortly.</p>
+    <a href="{{ url_for('auth_routes.login') }}" class="btn btn-primary">Back to Login</a>
+</div>
+{% endblock %}

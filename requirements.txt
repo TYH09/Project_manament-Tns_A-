@@ -1,0 +1,11 @@
+Flask>=2.2.5
+Flask-Session
+Flask-Mail
+Flask-Migrate
+Flask-SQLAlchemy
+Flask-WTF
+mysql-connector-python
+bcrypt
+python-dotenv
+email-validator
+gunicorn

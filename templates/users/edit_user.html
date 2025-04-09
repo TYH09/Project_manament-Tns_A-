@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Edit User</h2>
+    <form method="POST" action="{{ url_for('user_routes.edit_user', user_id=user.user_id) }}">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.user_firstname }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.user_lastname }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.user_email }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="role_id" class="form-label">Role</label>
+            <select class="form-control" id="role_id" name="role_id" required>
+                {% for role in roles %}
+                <option value="{{ role.role_id }}" {% if role.role_id == user.role_id %}selected{% endif %}>
+                    {{ role.role_name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Update User</button>
+    </form>
+</div>
+{% endblock %}

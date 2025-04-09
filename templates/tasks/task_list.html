@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Tasks for Project: {{ project.project_name }}</h2>
+
+    <div class="text-end mb-3">
+        <a href="{{ url_for('task_routes.add_task', project_id=project.project_id) }}" class="btn btn-primary">
+            Add Task
+        </a>
+        <a href="{{ url_for('project_routes.manage_projects') }}" class="btn btn-secondary">Back to Projects</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>Due Date</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ task.task_title }}</td>
+                <td>{{ task.task_description }}</td>
+                <td>{{ task.assigned_to_name or 'Unassigned' }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.due_date or 'N/A' }}</td>
+                <td>{{ task.created_at.strftime('%Y-%m-%d') if task.created_at else 'N/A' }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="text-center">No tasks found for this project.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

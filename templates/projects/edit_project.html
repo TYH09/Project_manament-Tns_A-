@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Edit Project</h2>
+    <form method="POST" action="{{ url_for('project_routes.edit_project', project_id=project.project_id) }}">
+        <div class="mb-3">
+            <label for="project_name" class="form-label">Project Name</label>
+            <input type="text" class="form-control" id="project_name" name="project_name" value="{{ project.project_name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="project_description" class="form-label">Description</label>
+            <textarea class="form-control" id="project_description" name="project_description" rows="3">{{ project.project_description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-control" id="category" name="category">
+                <option value="Personal" {% if project.category == 'Personal' %}selected{% endif %}>Personal</option>
+                <option value="Work" {% if project.category == 'Work' %}selected{% endif %}>Work</option>
+                <option value="Study" {% if project.category == 'Study' %}selected{% endif %}>Study</option>
+                <option value="Home" {% if project.category == 'Home' %}selected{% endif %}>Home</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="due_date" class="form-label">Due Date</label>
+            <input type="date" class="form-control" id="due_date" name="due_date" value="{{ project.due_date }}">
+        </div>
+        <div class="mb-3">
+            <label for="created_by" class="form-label">Created By</label>
+            <input type="text" class="form-control" id="created_by" name="created_by" value="{{ project.created_by }}" readonly>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Update Project</button>
+    </form>
+</div>
+{% endblock %}
